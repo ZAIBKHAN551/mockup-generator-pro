@@ -1,0 +1,12 @@
+{
+  "name": "mockup-generator-pro",
+  "version": "1.0.0",
+  "description": "Professional online mockup generator",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "keywords": ["mockup", "generator", "design"],
+  "author": "Your Name",
+  "license": "MIT"
+}
