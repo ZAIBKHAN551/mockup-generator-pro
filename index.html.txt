@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Mockup Generator - Create Professional Product Mockups Online | MockupTool</title>
+    <meta name="description" content="Create stunning product mockups in seconds with our free online mockup generator. 12+ premium templates for t-shirts, mugs, phone cases & more. No design skills needed!">
+    <meta name="keywords" content="mockup generator, product mockups, t-shirt mockup, free mockup tool, design mockups online">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Free Mockup Generator - Create Professional Product Mockups">
+    <meta property="og:description" content="Create stunning product mockups in seconds with our free online mockup generator. 12+ premium templates available.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/mockup-generator">
+    <meta property="og:image" content="https://yourdomain.com/mockup-preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Mockup Generator Tool">
+    <meta name="twitter:description" content="Create professional product mockups online for free">
+    <link rel="canonical" href="https://yourdomain.com/mockup-generator">
+    
+    <!-- Schema Markup for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Mockup Generator",
+      "description": "Free online tool to create professional product mockups",
+      "url": "https://yourdomain.com/mockup-generator",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 300px 1fr 300px;
+            gap: 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            overflow: hidden;
+            min-height: 600px;
+        }
+
+        .sidebar {
+            padding: 20px;
+            background: #f8f9fa;
+            border-right: 1px solid #e9ecef;
+        }
+
+        .sidebar h3 {
+            margin-bottom: 15px;
+            color: #495057;
+            font-size: 1.1rem;
+        }
+
+        .upload-zone {
+            border: 3px dashed #667eea;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #f8f9ff, #ffffff);
+        }
+
+        .upload-zone:hover {
+            border-color: #764ba2;
+            background: linear-gradient(45deg, #f0f2ff, #f8f9ff);
+            transform: translateY(-2px);
+        }
+
+        .upload-zone.dragover {
+            border-color: #28a745;
+            background: #f8fff8;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .template-item {
+            aspect-ratio: 1;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+            background: #f8f9fa;
+        }
+
+        .template-item:hover {
+            border-color: #667eea;
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .template-item.selected {
+            border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .template-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .canvas-area {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+        }
+
+        .preview-container {
+            position: relative;
+            max-width: 100%;
+            max-height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .mockup-canvas {
+            position: relative;
+            background: #f8f9fa;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .mockup-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .design-overlay {
+            position: absolute;
+            border: 2px dashed rgba(102, 126, 234, 0.8);
+            cursor: move;
+            background: rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .design-overlay:hover {
+            background: rgba(102, 126, 234, 0.2);
+        }
+
+        .design-overlay img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0.9;
+        }
+
+        .controls {
+            padding: 20px;
+            background: #f8f9fa;
+            border-left: 1px solid #e9ecef;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #e9ecef;
+            outline: none;
+            margin-bottom: 10px;
+        }
+
+        .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .stats {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: white;
+        }
+
+        .no-selection {
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+            padding: 40px;
+        }
+
+        .color-picker {
+            width: 100%;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #uploadedImage {
+            display: none;
+        }
+
+        @media (max-width: 1200px) {
+            .main-content {
+                grid-template-columns: 250px 1fr 250px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+            }
+            
+            .sidebar, .controls {
+                border: none;
+                border-bottom: 1px solid #e9ecef;
+            }
+            
+            .template-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .template-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🎨 Mockup Generator</h1>
+            <p>Create professional product mockups in seconds</p>
+            <div class="stats">
+                <strong>12 Premium Templates</strong> • <strong>Unlimited Downloads</strong> • <strong>High Resolution</strong>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Left Sidebar - Upload & Templates -->
+            <div class="sidebar">
+                <h3>📎 Upload Your Design</h3>
+                <div class="upload-zone" onclick="document.getElementById('uploadedImage').click()">
+                    <div class="upload-icon">📤</div>
+                    <p><strong>Click to upload</strong><br>or drag & drop</p>
+                    <small>PNG, JPG, SVG supported</small>
+                </div>
+                <input type="file" id="uploadedImage" accept="image/*">
+                
+                <h3>🎯 Choose Template</h3>
+                <div class="template-grid" id="templateGrid">
+                    <!-- Templates will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Center Canvas -->
+            <div class="canvas-area">
+                <div id="previewArea" class="no-selection">
+                    <h3>👈 Select a template to get started</h3>
+                    <p>Upload your design and choose from our premium mockup templates</p>
+                </div>
+            </div>
+
+            <!-- Right Controls -->
+            <div class="controls">
+                <h3>🎛️ Customize</h3>
+                
+                <div class="control-group">
+                    <label for="scaleSlider">📏 Scale</label>
+                    <input type="range" id="scaleSlider" class="slider" min="0.5" max="2" step="0.1" value="1">
+                    <small>Resize your design</small>
+                </div>
+
+                <div class="control-group">
+                    <label for="rotationSlider">🔄 Rotation</label>
+                    <input type="range" id="rotationSlider" class="slider" min="-180" max="180" step="5" value="0">
+                    <small>Rotate your design</small>
+                </div>
+
+                <div class="control-group">
+                    <label for="opacitySlider">👻 Opacity</label>
+                    <input type="range" id="opacitySlider" class="slider" min="0.1" max="1" step="0.1" value="1">
+                    <small>Adjust transparency</small>
+                </div>
+
+                <div class="control-group">
+                    <label for="backgroundColorPicker">🎨 Background</label>
+                    <input type="color" id="backgroundColorPicker" class="color-picker" value="#ffffff">
+                    <small>Change background color</small>
+                </div>
+
+                <div class="control-group">
+                    <button class="btn btn-primary" onclick="downloadMockup()">
+                        💾 Download Mockup
+                    </button>
+                    <button class="btn btn-secondary" onclick="resetMockup()">
+                        🔄 Reset
+                    </button>
+                </div>
+
+                <div class="control-group">
+                    <small style="color: #6c757d; line-height: 1.4;">
+                        💡 <strong>Pro Tip:</strong> Drag your design on the mockup to reposition it perfectly!
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock templates data (in real app, this would come from API)
+        const templates = [
+            { id: 1, name: 'Black T-Shirt', image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iIzMzMzMzMyIvPjxyZWN0IHg9IjQwIiB5PSI2MCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiM0NDQ0NDQiIHJ4PSI1Ii8+PHRleHQgeD0iMTAwIiB5PSIyMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIiBmb250LXNpemU9IjEyIj5CbGFjayBULVNoaXJ0PC90ZXh0Pjwvc3ZnPg==', designArea: {x: 40, y: 60, width: 120, height: 100} },
+            { id: 2, name: 'White T-Shirt', image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iI2Y4ZjlmYSIvPjxyZWN0IHg9IjQwIiB5PSI2MCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iI2RkZCIgc3Ryb2tlLXdpZHRoPSIxIiByeD0iNSIvPjx0ZXh0IHg9IjEwMCIgeT0iMjIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzMzIiBmb250LXNpemU9IjEyIj5XaGl0ZSBULVNoaXJ0PC90ZXh0Pjwvc3ZnPg==', designArea: {x: 40, y: 60, width: 120, height: 100} },
+            { id: 3, name: 'Black Hoodie', image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iIzMzMzMzMyIvPjxyZWN0IHg9IjMwIiB5PSI0MCIgd2lkdGg9IjE0MCIgaGVpZ2h0PSIxNjAiIGZpbGw9IiMyMjIyMjIiIHJ4PSIxMCIvPjxyZWN0IHg9IjYwIiB5PSI4MCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjMzMzMzMzIiByeD0iNSIvPjx0ZXh0IHg9IjEwMCIgeT0iMjIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIxMiI+QmxhY2sgSG9vZGllPC90ZXh0Pjwvc3ZnPg==', designArea: {x: 60, y: 80, width: 80, height: 60} },
+            { id: 4, name: 'Coffee Mug', image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iI2Y4ZjlmYSIvPjxyZWN0IHg9IjUwIiB5PSI2MCIgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMjAiIGZpbGw9IndoaXRlIiBzdHJva2U9IiNkZGQiIHN0cm9rZS13aWR0aD0iMiIgcng9IjEwIi8+PHJlY3QgeD0iNzAiIHk9IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iNDAiIGZpbGw9IiNmOGY5ZmEiIHJ4PSIzIi8+PHRleHQgeD0iMTAwIiB5PSIyMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMzMzMiIGZvbnQtc2l6ZT0iMTIiPkNvZmZlZSBNdWc8L3RleHQ+PC9zdmc+', designArea: {x: 70, y: 90, width: 60, height: 40} },
+            { id: 5, name: 'Phone Case', image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iI2Y4ZjlmYSIvPjxyZWN0IHg9IjcwIiB5PSI0MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iIzMzMzMzMyIgcng9IjEwIi8+PHJlY3QgeD0iNzUiIHk9IjYwIiB3aWR0aD0iNTAiIGhlaWdodD0iMTAwIiBmaWxsPSIjNDQ0NDQ0IiByeD0iNSIvPjx0ZXh0IHg9IjEwMCIgeT0iMjIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzMzIiBmb250LXNpemU9IjEyIj5QaG9uZSBDYXNlPC90ZXh0Pjwvc3ZnPg==', designArea: {x: 75, y: 60, width: 50, height: 100} },
+            { id: 6, name: 'Tote Bag', image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iI2Y4ZjlmYSIvPjxyZWN0IHg9IjQwIiB5PSI3MCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iI2RkZCIgc3Ryb2tlLXdpZHRoPSIyIiByeD0iNSIvPjxyZWN0IHg9IjYwIiB5PSIxMDAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2Y4ZjlmYSIgcng9IjMiLz48dGV4dCB4PSIxMDAiIHk9IjIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyIgZm9udC1zaXplPSIxMiI+VG90ZSBCYWc8L3RleHQ+PC9zdmc+', designArea: {x: 60, y: 100, width: 80, height: 40} },
+            { id: 7, name: 'Laptop Sticker', image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iI2Y4ZjlmYSIvPjxyZWN0IHg9IjMwIiB5PSI2MCIgd2lkdGg9IjE0MCIgaGVpZ2h0PSI5MCIgZmlsbD0iIzMzMzMzMyIgcng9IjgiLz48cmVjdCB4PSI0MCIgeT0iNzAiIHdpZHRoPSIxMjAiIGhlaWdodD0iNzAiIGZpbGw9IiM0NDQ0NDQiIHJ4PSI1Ii8+PHJlY3QgeD0iODAiIHk9IjkwIiB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIGZpbGw9IiM1NTU1NTUiIHJ4PSIzIi8+PHRleHQgeD0iMTAwIiB5PSIyMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMzMzMiIGZvbnQtc2l6ZT0iMTIiPkxhcHRvcCBTdGlja2VyPC90ZXh0Pjwvc3ZnPg==', designArea: {x: 80, y: 90, width: 40, height: 30} },
+            { id: 8, name: 'Poster', image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iI2Y4ZjlmYSIvPjxyZWN0IHg9IjUwIiB5PSI0MCIgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxNDAiIGZpbGw9IndoaXRlIiBzdHJva2U9IiNkZGQiIHN0cm9rZS13aWR0aD0iMiIgcng9IjUiLz48cmVjdCB4PSI2MCIgeT0iNjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmOGY5ZmEiIHJ4PSIzIi8+PHRleHQgeD0iMTAwIiB5PSIyMTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMzMzMiIGZvbnQtc2l6ZT0iMTIiPlBvc3RlcjwvdGV4dD48L3N2Zz4=', designArea: {x: 60, y: 60, width: 80, height: 100} },
+            { id: 9, name: 'Baseball Cap', image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iI2Y4ZjlmYSIvPjxlbGxpcHNlIGN4PSIxMDAiIGN5PSIxMDAiIHJ4PSI2MCIgcnk9IjQwIiBmaWxsPSIjMzMzMzMzIi8+PGVsbGlwc2UgY3g9IjEwMCIgY3k9IjkwIiByeD0iMzAiIHJ5PSIyMCIgZmlsbD0iIzQ0NDQ0NCIvPjx0ZXh0IHg9IjEwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzMzIiBmb250LXNpemU9IjEyIj5CYXN<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Mockup Generator - Create Professional Product Mockups Online | MockupTool</title>
+    <meta name="description" content="Create stunning product mockups in seconds with our free online mockup generator. 12+ premium templates for t-shirts, mugs, phone cases & more. No design skills needed!">
+    <meta name="keywords" content="mockup generator, product mockups, t-shirt mockup, free mockup tool, design mockups online">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Free Mockup Generator - Create Professional Product Mockups">
+    <meta property="og:description" content="Create stunning product mockups in seconds with our free online mockup generator. 12+ premium templates available.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/mockup-generator">
+    <meta property="og:image" content="https://yourdomain.com/mockup-preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Mockup Generator Tool">
+    <meta name="twitter:description" content="Create professional product mockups online for free">
+    <link rel="canonical" href="https://yourdomain.com/mockup-generator">
+    
+    <!-- Schema Markup for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Mockup Generator",
+      "description": "Free online tool to create professional product mockups",
+      "url": "https://yourdomain.com/mockup-generator",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 300px 1fr 300px;
+            gap: 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            overflow: hidden;
+            min-height: 600px;
+        }
+
+        .sidebar {
+            padding: 20px;
+            background: #f8f9fa;
+            border-right: 1px solid #e9ecef;
+        }
+
+        .sidebar h3 {
+            margin-bottom: 15px;
+            color: #495057;
+            font-size: 1.1rem;
+        }
+
+        .upload-zone {
+            border: 3px dashed #667eea;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #f8f9ff, #ffffff);
+        }
+
+        .upload-zone:hover {
+            border-color: #764ba2;
+            background: linear-gradient(45deg, #f0f2ff, #f8f9ff);
+            transform: translateY(-2px);
+        }
+
+        .upload-zone.dragover {
+            border-color: #28a745;
+            background: #f8fff8;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .template-item {
+            aspect-ratio: 1;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+            background: #f8f9fa;
+        }
+
+        .template-item:hover {
+            border-color: #667eea;
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .template-item.selected {
+            border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .template-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .canvas-area {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+        }
+
+        .preview-container {
+            position: relative;
+            max-width: 100%;
+            max-height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .mockup-canvas {
+            position: relative;
+            background: #f8f9fa;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .mockup-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .design-overlay {
+            position: absolute;
+            border: 2px dashed rgba(102, 126, 234, 0.8);
+            cursor: move;
+            background: rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .design-overlay:hover {
+            background: rgba(102, 126, 234, 0.2);
+        }
+
+        .design-overlay img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0.9;
+        }
+
+        .controls {
+            padding: 20px;
+            background: #f8f9fa;
+            border-left: 1px solid #e9ecef;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #e9ecef;
+            outline: none;
+            margin-bottom: 10px;
+        }
+
+        .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .stats {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: white;
+        }
+
+        .no-selection {
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+            padding: 40px;
+        }
+
+        .color-picker {
+            width: 100%;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #uploadedImage {
+            display: none;
+        }
+
+        @media (max-width: 1200px) {
+            .main-content {
+                grid-template-columns: 250px 1fr 250px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+            }
+            
+            .sidebar, .controls {
+                border: none;
+                border-bottom: 1px solid #e9ecef;
+            }
+            
+            .template-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .template-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🎨 Mockup Generator</h1>
+            <p>Create professional product mockups in seconds</p>
+            <div class="stats">
+                <strong>12 Premium Templates</strong> • <strong>Unlimited Downloads</strong> • <strong>High Resolution</strong>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Left Sidebar - Upload & Templates -->
+            <div class="sidebar">
+                <h3>📎 Upload Your Design</h3>
+                <div class="upload-zone" onclick="document.getElementById('uploadedImage').click()">
+                    <div class="upload-icon">📤</div>
+                    <p><strong>Click to upload</strong><br>or drag & drop</p>
+                    <small>PNG, JPG, SVG supported</small>
+                </div>
+                <input type="file" id="uploadedImage" accept="image/*">
+                
+                <h3>🎯 Choose Template</h3>
+                <div class="template-grid" id="templateGrid">
+                    <!-- Templates will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Center Canvas -->
+            <div class="canvas-area">
+                <div id="previewArea" class="no-selection">
+                    <h3>👈 Select a template to get started</h3>
+                    <p>Upload your design and choose from our premium mockup templates</p>
+                </div>
+            </div>
+
+            <!-- Right Controls -->
+            <div class="controls">
+                <h3>🎛️ Customize</h3>
+                
+                <div class="control-group">
+                    <label for="scaleSlider">📏 Scale</label>
+                    <input type="range" id="scaleSlider" class="slider" min="0.5" max="2" step="0.1" value="1">
+                    <small>Resize your design</small>
+                </div>
+
+                <div class="control-group">
+                    <label for="rotationSlider">🔄 Rotation</label>
+                    <input type="range" id="rotationSlider" class="slider" min="-180" max="180" step="5" value="0">
+                    <small>Rotate your design</small>
+                </div>
+
+                <div class="control-group">
+                    <label for="opacitySlider">👻 Opacity</label>
+                    <input type="range" id="opacitySlider" class="slider" min="0.1" max="1" step="0.1" value="1">
+                    <small>Adjust transparency</small>
+                </div>
+
+                <div class="control-group">
+                    <label for="backgroundColorPicker">🎨 Background</label>
+                    <input type="color" id="backgroundColorPicker" class="color-picker" value="#ffffff">
+                    <small>Change background color</small>
+                </div>
+
+                <div class="control-group">
+                    <button class="btn btn-primary" onclick="downloadMockup()">
+                        💾 Download Mockup
+                    </button>
+                    <button class="btn btn-secondary" onclick="resetMockup()">
+                        🔄 Reset
+                    </button>
+                </div>
+
+                <div class="control-group">
+                    <small style="color: #6c757d; line-height: 1.4;">
+                        💡 <strong>Pro Tip:</strong> Drag your design on the mockup to reposition it perfectly!
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock templates data (in real app, this would come from API)
+        const templates = [
+            { id: 1, name: 'Black T-Shirt', image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iIzMzMzMzMyIvPjxyZWN0IHg9IjQwIiB5PSI2MCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiM0NDQ0NDQiIHJ4PSI1Ii8+PHRleHQgeD0iMTAwIiB5PSIyMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIiBmb250LXNpemU9IjEyIj5CbGFjayBULVNoaXJ0PC90ZXh0Pjwvc3ZnPg==', designArea: {x: 40, y: 60, width: 120, height: 100} },
+            { id: 2, name: 'White T-Shirt', image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iI2Y4ZjlmYSIvPjxyZWN0IHg9IjQwIiB5PSI2MCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iI2RkZCIgc3Ryb2tlLXdpZHRoPSIxIiByeD0iNSIvPjx0ZXh0IHg9IjEwMCIgeT0iMjIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzMzIiBmb250LXNpemU9IjEyIj5XaGl0ZSBULVNoaXJ0PC90ZXh0Pjwvc3ZnPg==', designArea: {x: 40, y: 60, width: 120, height: 100} },
+            { id: 3, name: 'Black Hoodie', image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iIzMzMzMzMyIvPjxyZWN0IHg9IjMwIiB5PSI0MCIgd2lkdGg9IjE0MCIgaGVpZ2h0PSIxNjAiIGZpbGw9IiMyMjIyMjIiIHJ4PSIxMCIvPjxyZWN0IHg9IjYwIiB5PSI4MCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjMzMzMzMzIiByeD0iNSIvPjx0ZXh0IHg9IjEwMCIgeT0iMjIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIxMiI+QmxhY2sgSG9vZGllPC90ZXh0Pjwvc3ZnPg==', designArea: {x: 60, y: 80, width: 80, height: 60} },
+            { id: 4, name: 'Coffee Mug', image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iI2Y4ZjlmYSIvPjxyZWN0IHg9IjUwIiB5PSI2MCIgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMjAiIGZpbGw9IndoaXRlIiBzdHJva2U9IiNkZGQiIHN0cm9rZS13aWR0aD0iMiIgcng9IjEwIi8+PHJlY3QgeD0iNzAiIHk9IjkwIiB3aWR0aD0iNjAiIGhlaWdodD0iNDAiIGZpbGw9IiNmOGY5ZmEiIHJ4PSIzIi8+PHRleHQgeD0iMTAwIiB5PSIyMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMzMzMiIGZvbnQtc2l6ZT0iMTIiPkNvZmZlZSBNdWc8L3RleHQ+PC9zdmc+', designArea: {x: 70, y: 90, width: 60, height: 40} },
+            { id: 5, name: 'Phone Case', image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iI2Y4ZjlmYSIvPjxyZWN0IHg9IjcwIiB5PSI0MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iIzMzMzMzMyIgcng9IjEwIi8+PHJlY3QgeD0iNzUiIHk9IjYwIiB3aWR0aD0iNTAiIGhlaWdodD0iMTAwIiBmaWxsPSIjNDQ0NDQ0IiByeD0iNSIvPjx0ZXh0IHg9IjEwMCIgeT0iMjIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzMzIiBmb250LXNpemU9IjEyIj5QaG9uZSBDYXNlPC90ZXh0Pjwvc3ZnPg==', designArea: {x: 75, y: 60, width: 50, height: 100} },
+            { id: 6, name: 'Tote Bag', image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iI2Y4ZjlmYSIvPjxyZWN0IHg9IjQwIiB5PSI3MCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iI2RkZCIgc3Ryb2tlLXdpZHRoPSIyIiByeD0iNSIvPjxyZWN0IHg9IjYwIiB5PSIxMDAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2Y4ZjlmYSIgcng9IjMiLz48dGV4dCB4PSIxMDAiIHk9IjIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyIgZm9udC1zaXplPSIxMiI+VG90ZSBCYWc8L3RleHQ+PC9zdmc+', designArea: {x: 60, y: 100, width: 80, height: 40} },
+            { id: 7, name: 'Laptop Sticker', image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iI2Y4ZjlmYSIvPjxyZWN0IHg9IjMwIiB5PSI2MCIgd2lkdGg9IjE0MCIgaGVpZ2h0PSI5MCIgZmlsbD0iIzMzMzMzMyIgcng9IjgiLz48cmVjdCB4PSI0MCIgeT0iNzAiIHdpZHRoPSIxMjAiIGhlaWdodD0iNzAiIGZpbGw9IiM0NDQ0NDQiIHJ4PSI1Ii8+PHJlY3QgeD0iODAiIHk9IjkwIiB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIGZpbGw9IiM1NTU1NTUiIHJ4PSIzIi8+PHRleHQgeD0iMTAwIiB5PSIyMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMzMzMiIGZvbnQtc2l6ZT0iMTIiPkxhcHRvcCBTdGlja2VyPC90ZXh0Pjwvc3ZnPg==', designArea: {x: 80, y: 90, width: 40, height: 30} },
+            { id: 8, name: 'Poster', image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iI2Y4ZjlmYSIvPjxyZWN0IHg9IjUwIiB5PSI0MCIgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxNDAiIGZpbGw9IndoaXRlIiBzdHJva2U9IiNkZGQiIHN0cm9rZS13aWR0aD0iMiIgcng9IjUiLz48cmVjdCB4PSI2MCIgeT0iNjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmOGY5ZmEiIHJ4PSIzIi8+PHRleHQgeD0iMTAwIiB5PSIyMTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMzMzMiIGZvbnQtc2l6ZT0iMTIiPlBvc3RlcjwvdGV4dD48L3N2Zz4=', designArea: {x: 60, y: 60, width: 80, height: 100} },
+            { id: 9, name: 'Baseball Cap', image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iI2Y4ZjlmYSIvPjxlbGxpcHNlIGN4PSIxMDAiIGN5PSIxMDAiIHJ4PSI2MCIgcnk9IjQwIiBmaWxsPSIjMzMzMzMzIi8+PGVsbGlwc2UgY3g9IjEwMCIgY3k9IjkwIiByeD0iMzAiIHJ5PSIyMCIgZmlsbD0iIzQ0NDQ0NCIvPjx0ZXh0IHg9IjEwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzMzIiBmb250LXNpemU9IjEyIj5CYXN
