@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "mockup-generator",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
